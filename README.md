@@ -1,5 +1,5 @@
-# Web-Scraping
-Contains tutorials I write for an introduction to web scraping 
+# General Files
+Includes a mix of some early programming and some random projects
 
 
 
