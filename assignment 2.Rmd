@@ -1,0 +1,162 @@
+---
+title: "Homework 2"
+author: "Deon Crasto"
+date: "March 13, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r}
+#Q2
+
+train.county <- read.csv("file:///C:/Users/Deon/Downloads/file_edit_train.csv")
+test <- read.csv("file:///C:/Users/Deon/Downloads/house_test.csv")
+train <- read.csv("file:///C:/Users/Deon/Downloads/house_train2.csv")
+
+fit <- lm(price2013 ~  state, data = train)
+
+summary(fit)
+a <- predict(fit, test)
+
+b <-data.frame(ID = test$id, price2013 = a)
+
+
+```
+
+*Q2 A What is the intercept?  What does it correspond to?*
+
+The intercept is 281730. The intercept corresponds to expected mean value of Y when all X=0.   
+*Q2 B How do you get this information from your regression?* 
+
+By using the summary() command over the model you just used to fit the data. Specifically for this event, we use the summary(fit) because we name our linear model as fit. 
+
+*Q2 C Based on your regression coefficients, what states have the most and least expensive average homes?*
+
+StateDC has the highest coefficient with 232558.9 and StateWV has the lowest coefficient with -183306.9
+
+*Q2D How do you get this information from your regression?*
+
+By using the summary() command over the model again. 
+
+*Q2E What is the average price of homes in those states?*
+
+We know the equation of a regression with only one variable (x) in this case State will be given by y = mx + c
+
+We know that for for all other states except DC and WV, our equations will have the x value as 0. Therefore, for DC the average price would be 232558.9 + 281730 = $514,288.9 and for WV, the average price would be -183306.9 + 281730 = $98,423.1
+
+*Q2F How do you get this information from your regression?* 
+
+Using the linear equation model y = mx + c and the coefficients from the model (using summary(fit) for the answer)
+
+
+
+```{r}
+
+#Q3
+
+
+fit_2 <- lm(price2013 ~  state + county, data = train.county)
+
+summary(fit_2)
+
+c <- predict(fit_2, test)
+
+b<-data.frame(ID = test$id, price2013 = c)
+
+
+
+```
+Highest co-efficeint is countypitkin 857920.3
+
+Lowest coefficient is countycalaveras -352624.4
+
+We get this by using the summary(fit2)
+
+Lowest 
+
+
+```{r}
+
+#Q4
+
+
+fit1.mymodel <- lm(price2013 ~ price2007 + state + poverty, data = train)
+
+fit2.mymodel <- lm(price2013 ~ price2007 + state, data = train)
+
+summary(fit1.mymodel)
+
+x <- predict(fit1.mymodel, test)
+
+x2 <- predict(fit2.mymodel, test)
+
+y <-data.frame(ID = test$id, price2013 = x)
+
+y2 <- data.frame(ID = test$id, price2013 = x) 
+write.csv(y, file = "C:/Users/Deon/Desktop/results.csv")
+
+write.csv(y2, file = "C:/Users/Deon/Desktop/results2.csv")
+
+
+
+```
+
+Q4 
+Describe what you did to build the best predictor possible
+
+I used a linear model using the available data to fit a line to the inputs (I used the price2007, state and poverty variables for the first time and then only poverty and state for my second model to predict prices in 2013 using the equation y = mx + c)
+
+
+Give your best Kaggle score: 55140.87344
+
+Give your Kaggle username: dcrasto (team name) deon77 (username)
+
+
+Q5. Suppose you have 2 bags.
+Bag #1 has 1 black ball and 2 white balls.
+Bag #2 has 1 black ball and 3 white balls.
+Suppose you pick a bag at random, and select a ball from that bag. 
+What is the probability of selecting a white ball?
+
+We know that probabilty of selecting a white ball from bag 1: 
+
+P = 1/2 * 2/3 = 2/6
+
+Also, probability of selecting a white ball from bag 2: 
+
+ = 1/2 * 3/4 = 3/8 
+ 
+ Probability of selecting a white ball at random from the bag = 2/6 + 3/8 = 17/24
+ 
+ 6. (10 points) A soccer team wins 60% of its games when it scores the first goal, and 10% of its games when the opposing team scores first. If the team scores the first goal about 30% of the time, what fraction of the games does it win? 
+ 
+ A: P of team winning a game when it scores first = 0.6
+ 
+ B: P of team winning a game when opposition scores first = 0.1 
+ 
+ C: P of Team scores first goal: 0.3
+ 
+ D: P of Other team scores first: 0.7
+ 
+ By Bayes theorem, we get, 
+ 
+ P of winning game if team scores first = A X C + B X D = 0.6 X 0.3 + 0.7 X 0.1 = 0.18 + 0.7 = 0.25
+ 
+ Therefore if team scores first goal about 30% of the time it wins 1/4th of its games.
+ 
+
+Q5 
+
+
